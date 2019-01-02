@@ -1,0 +1,129 @@
+<div class="re-join-qq" style="display: none">
+    <img src="css/img/join-qq.png">
+    <div style="background-color: white">
+        <label class="layui-form-label">群号</label>
+        <div class="layui-input-block">
+            <div class="layui-form-mid">
+                693107038
+            </div>
+        </div>
+    </div>
+</div>
+<div class="re-join-sponsor" style="display: none">
+    <img src="css/img/join-sponsor.png">
+</div>
+<div class="re-client-download re-layar-form" style="display: none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">百度网盘</label>
+        <div class="layui-input-block">
+            <div class="layui-form-mid layui-word-aux">
+                <a href="https://pan.baidu.com/s/1SzlA0K-pu06H2bMWEYZqbQ" target="_blank">https://pan.baidu.com/s/1SzlA0K-pu06H2bMWEYZqbQ</a>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">提取码</label>
+        <div class="layui-input-block">
+            <div class="layui-form-mid layui-word-aux">
+                6uf8
+            </div>
+        </div>
+    </div>
+    <div class="re-text-align-c re-footer">
+        <button type="button" class="layui-btn layui-btn-primary" onclick="layer.closeAll()">关闭</button>
+    </div>
+</div>
+<div class="re-code-download re-layar-form" style="display: none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">GIT</label>
+        <div class="layui-input-block">
+            <div class="layui-form-mid layui-word-aux">
+                https://pan.baidu.com/s/1SzlA0K-pu06H2bMWEYZqbQ
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">友情提醒</label>
+        <div class="layui-input-block">
+            <div class="layui-form-mid layui-word-aux">
+                因使用到本地存储，请在服务中运行。
+            </div>
+        </div>
+    </div>
+    <div class="re-text-align-c re-footer">
+        <button type="button" class="layui-btn layui-btn-primary" onclick="layer.closeAll()">关闭</button>
+    </div>
+</div>
+<script>
+
+    function openopenContactMessage() {
+        layer.open({
+            type: 2,
+            title: '留言',
+            content: 'form.html?formId=4b7341b0-0d20-11e9-ba75-ad5409da7b92&autoHeight=true',
+            area: ['800px', '420px'],
+            offset: 'rt',
+            maxmin: true
+        });
+    }
+
+    function openJoinQQ() {
+        $('.re-join-qq').show();
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 1,
+            offset: 'rt',
+            skin: 'layui-layer-nobg',
+            shadeClose: true,
+            content: $('.re-join-qq'),
+            end: function () {
+                $('.re-join-qq').hide();
+            }
+        });
+    }
+
+    function openJoinSponsor() {
+        $('.re-join-sponsor').show();
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 1,
+            offset: 'rt',
+            skin: 'layui-layer-nobg',
+            shadeClose: true,
+            content: $('.re-join-sponsor'),
+            end: function () {
+                $('.re-join-sponsor').hide();
+            }
+        });
+    }
+
+    function openClientDownload() {
+        $('.re-client-download').show();
+        layer.open({
+            type: 1,
+            title: '星源智能数据管理-客户端下载',
+            area:['600px','210px'],
+            offset: 'rt',
+            content: $('.re-client-download'),
+            end: function () {
+                $('.re-client-download').hide();
+            }
+        });
+    }
+
+    function openCodeDownload() {
+        $('.re-code-download').show();
+        layer.open({
+            type: 1,
+            title: '源码下载',
+            area:['600px','210px'],
+            offset: 'rt',
+            content: $('.re-code-download'),
+            end: function () {
+                $('.re-code-download').hide();
+            }
+        });
+    }
+</script>

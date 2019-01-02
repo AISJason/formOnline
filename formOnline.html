@@ -1,0 +1,426 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>在线表单制作</title>
+    <meta name="keywords" content="runninge,星源,在线表单,动态表单,问卷调查,数据采集,数据挖掘,数据管理,物联网,管理后台,管理平台,开发框架">
+    <meta name="description" content="">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="plugin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/formSelects-v4.min.css" media="all">
+    <link rel="stylesheet" href="css/drag.min.css" media="all">
+    <link rel="stylesheet" href="css/admin.min.css" media="all">
+    <style>
+        .layui-card {
+            margin-bottom: 5px;
+        }
+
+        .layui-card-body {
+            padding: 5px 5px;
+        }
+    </style>
+</head>
+<body class="re-admin-bg">
+<div class="re-admin-bg re-padding5">
+    <div class="layui-row layui-col-space5">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header re-text-align-c">
+                    <button type="button" class="layui-btn layui-btn-sm" onclick="layoutMerge()">合并行</button>
+                    <button type="button" class="layui-btn layui-btn-sm" onclick="layoutSplit()">拆分行</button>
+                    <button type="button" class="layui-btn layui-btn-sm" onclick="layoutUpdate()">刷新表单</button>
+                </div>
+                <div class="layui-card-body">
+                    <div class="re-text-align-c re-drag-dropzone re-admin-bg">拖拽到此删除</div>
+                </div>
+                <div class="layui-card-body">
+                    <form class="layui-form re-view-form" action=""></form>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">选择组件添加</div>
+                <div class="layui-card-body">
+                    <div class="layui-row re-element-list">
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="string" REElementTypeTemplate="textRow">
+                            <div class="layui-bg-gray">单行输入</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="textArea" REElementTypeTemplate="textArea">
+                            <div class="layui-bg-gray">多行输入</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="decimal" REElementTypeTemplate="textCell">
+                            <div class="layui-bg-gray">数字</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="int" REElementTypeTemplate="textCell">
+                            <div class="layui-bg-gray">整数</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="phoneNumber" REElementTypeTemplate="textCell">
+                            <div class="layui-bg-gray">手机号码</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="telephoneNumber" REElementTypeTemplate="textCell">
+                            <div class="layui-bg-gray">固定电话</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="email" REElementTypeTemplate="textCell">
+                            <div class="layui-bg-gray">电子邮箱</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="dateTime" REElementTypeTemplate="dateTime">
+                            <div class="layui-bg-gray">日期</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="radio" REElementTypeTemplate="radio">
+                            <div class="layui-bg-gray">单项选择</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="checkbox" REElementTypeTemplate="checkbox">
+                            <div class="layui-bg-gray">多项选择</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="select" REElementTypeTemplate="select">
+                            <div class="layui-bg-gray">下拉列表</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="selects" REElementTypeTemplate="selects">
+                            <div class="layui-bg-gray">下拉多选</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="imgCode" REElementTypeTemplate="imgCode">
+                            <div class="layui-bg-gray">图形验证码</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="phoneCode" REElementTypeTemplate="phoneCode">
+                            <div class="layui-bg-gray">手机验证码</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="password" REElementTypeTemplate="password">
+                            <div class="layui-bg-gray">密码</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="hidden" REElementTypeTemplate="hidden">
+                            <div class="layui-bg-gray">隐藏值</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="switch" REElementTypeTemplate="switch">
+                            <div class="layui-bg-gray">开关</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="url" REElementTypeTemplate="textRow">
+                            <div class="layui-bg-gray">网址</div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm4" REElementTypeSetting="chinese" REElementTypeTemplate="textRow">
+                            <div class="layui-bg-gray">中文</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">组件编辑预览</div>
+                <div class="layui-card-body">
+                    <form class="layui-form re-element-view-form">
+                        <div class="re-text-align-c">
+                            <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="elementViewFormSubmit"> 验证测试</button>
+                            <button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">输入重置</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">组件编辑</div>
+                <div class="layui-card-body">
+                    <form class="layui-form re-element-edit-form" lay-filter="elementEdit">
+                        <div class="layui-form-item" REElementTypeEdit="fieldName">
+                            <label class="layui-form-label">字段名称</label>
+                            <div class="layui-input-inline">
+                                <input name="fieldName" class="layui-input" type="text" placeholder="请输入字段名称" autocomplete="off" lay-filter="changeValue" lay-verify="visibleRequired" lay-verType="tips">
+                            </div>
+                            <div class="layui-inline">
+                                <input name="fieldShow" type="checkbox" checked="" lay-skin="switch" lay-text="显示|隐藏" lay-filter="switchChange" value="1">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="itemName">
+                            <label class="layui-form-label">字段ID</label>
+                            <div class="layui-input-inline">
+                                <input name="itemName" class="layui-input" type="text" placeholder="请输入字段ID" autocomplete="off" lay-filter="changeValue" lay-verify="required" lay-verType="tips">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="placeholderText">
+                            <label class="layui-form-label">输入提示</label>
+                            <div class="layui-input-inline">
+                                <input name="placeholderText" class="layui-input" type="text" placeholder="请输入输入提示" autocomplete="off" lay-filter="changeValue">
+                            </div>
+                            <div class="layui-inline">
+                                <input name="placeholderShow" type="checkbox" checked="" lay-skin="switch" lay-text="显示|隐藏" lay-filter="switchChange" value="1">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="defaultVal">
+                            <label class="layui-form-label">默认值</label>
+                            <div class="layui-input-inline">
+                                <input name="defaultVal" class="layui-input" type="text" placeholder="请输入默认值" autocomplete="off" lay-filter="changeValue">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="expiresTime">
+                            <label class="layui-form-label">有效时间</label>
+                            <div class="layui-input-inline">
+                                <input name="expiresTime" class="layui-input" type="text" placeholder="请输入有效时间" autocomplete="off" lay-filter="changeValue" lay-verify="visibleRequired|int" lay-verType="tips" minVal="2">
+                            </div>
+                            <div class="layui-inline">
+                                <div class="layui-form-mid layui-word-aux">分钟</div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="codeLength">
+                            <label class="layui-form-label">验证码长度</label>
+                            <div class="layui-input-inline">
+                                <input name="codeLength" class="layui-input" type="text" placeholder="请输入验证码长度" autocomplete="off" lay-filter="changeValue" lay-verify="visibleRequired|int" lay-verType="tips" minVal="4" maxVal="6">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="dataType">
+                            <label class="layui-form-label">数据类型</label>
+                            <div class="layui-input-block">
+                                <input name="dataType" type="radio" title="字符" value="string" lay-filter="changeDataType">
+                                <input name="dataType" type="radio" title="数字" value="decimal" lay-filter="changeDataType">
+                                <input name="dataType" type="radio" title="整数" value="int" lay-filter="changeDataType">
+                                <input name="dataType" type="radio" title="系统时间" value="sysTime" lay-filter="changeDataType">
+                                <input name="dataType" type="radio" title="密码" value="password" lay-filter="changeDataType">
+                                <input name="dataType" type="radio" title="文本" value="textArea" lay-filter="changeDataType">
+                                <input name="dataType" type="radio" title="对象" value="json" lay-filter="changeDataType">
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text" REElementTypeEdit="options">
+                            <label class="layui-form-label">选项列表</label>
+                            <div class="layui-input-block">
+                                <textarea name="options" placeholder="请输入选项，格式如（英文逗号分隔）：选项1,选项2,选项3" class="layui-textarea" lay-filter="changeOptions" lay-verify="visibleRequired" lay-verType="tips"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="optionsTip">
+                            <label class="layui-form-label">选项提示</label>
+                            <div class="layui-input-inline">
+                                <input name="optionsTip" class="layui-input" type="text" placeholder="请输入选项提示" autocomplete="off" lay-filter="changeValue" lay-verify="visibleRequired" lay-verType="tips">
+                            </div>
+                            <div class="layui-inline">
+                                <input name="optionsSearch" type="checkbox" lay-skin="switch" lay-text="搜索开|搜索关" lay-filter="switchChange" value="1">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="optionsChecked">
+                            <label class="layui-form-label">默认选中</label>
+                            <div class="layui-input-block">
+                                <select name="optionsChecked" xm-select="optionsChecked" xm-select-skin="default"> </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="switchText">
+                            <label class="layui-form-label">开关文字</label>
+                            <div class="layui-input-inline">
+                                <input name="switchText" class="layui-input" type="text" placeholder="格式如：开|关" autocomplete="off" lay-filter="changeValue" lay-verify="visibleRequired" lay-verType="tips">
+                            </div>
+                            <div class="layui-inline">
+                                <input name="switchDefault" type="checkbox" lay-skin="switch" lay-text="默认开|默认关" lay-filter="switchChange" value="1">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="dateFormat">
+                            <label class="layui-form-label">日期格式</label>
+                            <div class="layui-input-inline">
+                                <select name="dateFormat" lay-filter="changeDateFormat">
+                                    <option value="yyyy">年</option>
+                                    <option value="yyyy-MM">月</option>
+                                    <option value="yyyy-MM-dd">日</option>
+                                    <option value="HH">时</option>
+                                    <option value="HH:mm">分</option>
+                                    <option value="HH:mm:ss">秒</option>
+                                    <option value="yyyy-MM-dd HH">yyyy-MM-dd HH</option>
+                                    <option value="yyyy-MM-dd HH:mm">yyyy-MM-dd HH:mm</option>
+                                    <option value="yyyy-MM-dd HH:mm:ss">yyyy-MM-dd HH:mm:ss</option>
+                                </select>
+                                <input name="dateType" value="month" type="hidden">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="checkboxTheme">
+                            <label class="layui-form-label">风格</label>
+                            <div class="layui-input-inline">
+                                <input name="checkboxTheme" type="radio" title="时尚" value="0" lay-filter="changeCheckboxTheme">
+                                <input name="checkboxTheme" type="radio" title="经典" value="1" lay-filter="changeCheckboxTheme">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="layout">
+                            <label class="layui-form-label">布局</label>
+                            <div class="layui-input-inline">
+                                <input name="layout" type="radio" title="行" value="row" lay-filter="changeLayout">
+                                <input name="layout" type="radio" title="列" value="cell" lay-filter="changeLayout">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="tipShow">
+                            <label class="layui-form-label">说明文字</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="tipShow" type="checkbox" lay-skin="switch" lay-text="显示|隐藏" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-input-inline">
+                                <input name="tipText" class="layui-input" type="text" placeholder="请输入说明文字" autocomplete="off" lay-filter="changeValue">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="required">
+                            <label class="layui-form-label">必填验证</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="required" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">自定义提示</label>
+                                <div class="layui-input-inline re-inline-width70">
+                                    <input name="requiredCustom" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                                </div>
+                                <div class="layui-input-inline">
+                                    <input name="requiredMsg" class="layui-input" type="text" placeholder="请输入自定义提示文字" autocomplete="off" lay-filter="changeValue">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="choose">
+                            <label class="layui-form-label">必选验证</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="choose" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">自定义提示</label>
+                                <div class="layui-input-inline re-inline-width70">
+                                    <input name="chooseCustom" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                                </div>
+                                <div class="layui-input-inline">
+                                    <input name="chooseMsg" class="layui-input" type="text" placeholder="请输入自定义验证提示" autocomplete="off" lay-filter="changeValue">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="minLenShow">
+                            <label class="layui-form-label">最少字数</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="minLenShow" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-input-inline">
+                                <input name="minLen" class="layui-input" type="text" placeholder="最少字数数" autocomplete="off" lay-filter="changeValue" lay-verify="int" lay-verType="tips" minVal="1">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="maxLenShow">
+                            <label class="layui-form-label">最多字数</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="maxLenShow" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-input-inline">
+                                <input name="maxLen" class="layui-input" type="text" placeholder="最多字数数" autocomplete="off" lay-filter="changeValue" lay-verify="int" lay-verType="tips">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="minChecked">
+                            <label class="layui-form-label">最少选中</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="minCheckedShow" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-input-inline">
+                                <input name="minChecked" class="layui-input" type="text" placeholder="最少选中项" autocomplete="off" lay-filter="changeValue" lay-verify="int" lay-verType="tips" minVal="1">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="maxChecked">
+                            <label class="layui-form-label">最多选中</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="maxCheckedShow" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-input-inline">
+                                <input name="maxChecked" class="layui-input" type="text" placeholder="最多选中项" autocomplete="off" lay-filter="changeValue" lay-verify="int" lay-verType="tips">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="decimalPlaceShow">
+                            <label class="layui-form-label">小数位</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="decimalPlaceShow" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-input-inline">
+                                <input name="decimalPlace" class="layui-input" type="text" placeholder="小数位" autocomplete="off" lay-filter="changeValue" lay-verify="int" lay-verType="tips" minVal="0">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="minValShow">
+                            <label class="layui-form-label">最小值</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="minValShow" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-input-inline">
+                                <input name="minVal" class="layui-input" type="text" placeholder="最小值" autocomplete="off" lay-filter="changeValue" lay-verify="decimal" lay-verType="tips">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="maxValShow">
+                            <label class="layui-form-label">最大值</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="maxValShow" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-input-inline">
+                                <input name="maxVal" class="layui-input" type="text" placeholder="最大值" autocomplete="off" lay-filter="changeValue" lay-verify="decimal" lay-verType="tips">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="regularShow">
+                            <label class="layui-form-label">正则验证</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="regularShow" type="checkbox" lay-skin="switch" lay-text="开|关" lay-filter="switchChange" value="1">
+                            </div>
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <input name="regular" class="layui-input" type="text" placeholder="正则表达式" autocomplete="off" lay-filter="changeValue" lay-verify="regular" lay-verType="tips">
+                                </div>
+                                <div class="layui-input-inline">
+                                    <input name="regularMsg" class="layui-input" type="text" placeholder="验证提示" autocomplete="off" lay-filter="changeValue">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" REElementTypeEdit="uniqueness">
+                            <label class="layui-form-label">唯一验证</label>
+                            <div class="layui-input-inline re-inline-width70">
+                                <input name="uniqueness" type="checkbox" lay-skin="switch" lay-text="是|否" lay-filter="switchChange" value="1">
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-hide">
+                            <button class="layui-btn" lay-submit="" lay-filter="elementEditFormSubmit">提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-layout-admin">
+        <div class="layui-input-block">
+            <div class="layui-footer re-text-align-c" style="left: 0;">
+                <button type="button" class="layui-btn layui-btn-primary" onclick="formView()">预览</button>
+                <button type="button" class="layui-btn layui-btn-danger" onclick="newForm()">新表单</button>
+
+                <div style="float: right">
+                    <a href="https://www.runninge.com" target="_blank" title="官网">
+                        <button type="button" class="layui-btn layui-btn-normal">
+                            <i class="layui-icon layui-icon-home"></i> <cite>官网</cite>
+                        </button>
+                    </a>
+                    <a href="javascript:;" onclick="openClientDownload()">
+                        <button type="button" class="layui-btn layui-btn-normal">
+                            <i class="layui-icon layui-icon-app"></i><cite>客户端</cite>
+                        </button>
+                    </a>
+                    <a href="javascript:;" onclick="openCodeDownload()">
+                        <button type="button" class="layui-btn layui-btn-normal">
+                            <i class="layui-icon layui-icon-fonts-code"></i><cite>GIT</cite>
+                        </button>
+                    </a>
+                    <a href="javascript:;" onclick="openJoinQQ()">
+                        <button type="button" class="layui-btn layui-btn-normal">
+                            <i class="layui-icon layui-icon-group"></i> <cite>QQ群</cite>
+                        </button>
+                    </a>
+                    <a href="javascript:;" onclick="openJoinSponsor()">
+                        <button type="button" class="layui-btn layui-btn-normal">
+                            <i class="layui-icon layui-icon-praise"></i> <cite>赞助</cite>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="re-hidden-div"></div>
+<!--[if lt IE 9]>
+<script src="js/html5shiv.min.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.cookie.min.js"></script>
+<script src="js/jslinq.min.js"></script>
+<script src="js/crypto-js.js"></script>
+<script src="js/drag.js"></script>
+<script src="js/readmin.js"></script>
+<script src="plugin/layui/layui.all.js"></script>
+<script src="js/formSelects-v4.min.js"></script>
+<script src="js/page/formOnline.js"></script>
+</body>
+<script>
+    $('.re-hidden-div').load('hiddenDiv.html')
+</script>
+</html>

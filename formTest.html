@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>星源智能数据管理</title>
+    <meta name="keywords" content="runninge,星源,在线表单,动态表单,问卷调查,数据采集,数据挖掘,数据管理,物联网,管理后台,管理平台,开发框架">
+    <meta name="description" content="">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="plugin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/formSelects-v4.min.css" media="all">
+    <link rel="stylesheet" href="css/admin.min.css" media="all">
+</head>
+<body>
+<div class="layui-container">
+    <form class="layui-card-body layui-form re-view-form" lay-filter="form" action="">
+        <div class="layui-layout-admin">
+            <div class="layui-input-block">
+                <div class="layui-footer re-text-align-c" style="left: 0;">
+                    <button class="layui-btn" lay-submit="" lay-filter="formSubmitTest">提交测试</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <button type="button" class="layui-btn" onclick="loadFormDataTest()">撤销</button>
+                    <button type="button" class="layui-btn layui-btn-primary" onclick="parent.layer.closeAll()">关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--[if lt IE 9]>
+<script src="js/html5shiv.min.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.cookie.min.js"></script>
+<script src="js/jslinq.min.js"></script>
+<script src="js/crypto-js.js"></script>
+<script src="js/drag.js"></script>
+<script src="js/readmin.js"></script>
+<script src="plugin/layui/layui.all.js"></script>
+<script src="js/formSelects-v4.min.js"></script>
+</body>
+<script>
+    var form = layui.form, laydate = layui.laydate, formSelects = layui.formSelects;
+
+    var autoHeight = R.getQueryPara('autoHeight');
+
+    //表单验证
+    form.verify(R.verify);
+
+    //提交测试
+    form.on('submit(formSubmitTest)', function (data) {
+        var fields = R.getFormData('formLoad');
+
+        $.extend(data.field, fields);
+        localStorage.setItem('formTestData', R.aesEncryptObj(data.field));
+        return false;
+    });
+
+    //加载测试
+    function loadFormDataTest() {
+        R.loadFormData(R.aesDecryptObj(localStorage.getItem('formTestData')), 'form');
+    }
+
+    $(function () {
+        var formConfig = R.aesDecryptObj(localStorage.getItem('formTestData'));
+
+        var html = R.getFormHtml(formConfig);
+        $('.re-view-form').prepend(html);
+
+        $.each(formConfig, function (idx, json) {
+            R.bindFormHtml(json, 1);
+        });
+
+        form.render();
+        localStorage.removeItem('formTestData');
+
+        if (autoHeight) parent.layer.iframeAuto(parent.layer.getFrameIndex(window.name));
+    });
+</script>
+</html>

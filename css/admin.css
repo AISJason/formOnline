@@ -1,0 +1,85 @@
+.re-admin-bg {
+    background-color: #f2f2f2;
+}
+.re-padding5 {
+    padding: 5px;
+}
+.re-text-align-c {
+    text-align: center
+}
+.re-inline-width70 {
+    width: 70px !important;
+}
+
+.re-element-list > div {
+    padding: 2.5px;
+}
+.re-element-list > div .active {
+    background-color: #5FB878 !important;
+    color: #fff !important;
+}
+.re-element-list > div :hover {
+    background-color: #5FB878 !important;
+    color: #fff !important;
+}
+.re-element-list > div > div {
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 5px;
+    padding-left: 15px;
+}
+
+.re-drag-dropzone {
+    line-height: 40px;
+}
+.re-drag-merge{
+    margin-bottom: 10px;
+}
+.re-drag-active-edit label {
+    background-color: #5FB878;
+    color: #fff;
+}
+
+.layui-layout-admin .layui-footer{
+    z-index: 100;
+}
+
+.re-search-form .layui-form-item {
+    margin-bottom: 5px;
+}
+.re-search-form .layui-line {
+    float: left;
+    margin-left: 20px;
+}
+.re-search-form .layui-input-inline {
+    margin-top: 5px;
+    margin-right: 0;
+}
+.re-search-form .layui-form-mid {
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 13px !important;
+}
+.re-search-form .layui-form-label {
+    padding-left: 0;
+    padding-right: 8px;
+    padding-top: 13px;
+    width: auto;
+}
+
+.re-layar-form {
+    padding: 10px;
+    padding-right: 30px;
+}
+.re-layar-form .re-footer {
+    position: absolute;
+    bottom: 1px;
+    line-height: 50px;
+    width: 100%;
+    left: 0;
+    background-color: #F8F8F8
+}
+
+/*.re-search-form .layui-btn-group {*/
+    /*padding-top: 8px;*/
+/*}*/
